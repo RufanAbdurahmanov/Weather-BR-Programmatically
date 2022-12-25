@@ -18,19 +18,17 @@ class ApiService: HomeServiceProtocol {
     
     func getCurrentWeather(city: String, complete: @escaping (Current? , String?)->()) {
         
-        let url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/\(city)?unitGroup=metric&include=current&key=2RS2L2SRR34FEPUWMFHJQ9XLF&contentType=json"
+        let url = "\(baseURL.url.rawValue)/rest/services/timeline/\(city)?unitGroup=metric&include=\(Request.trending.path)&key=\(apiKey.key.rawValue)&contentType=json"
         
         NetworkRequest.shared.requestAPI(type: Current.self, url: url) { response in
-
+            
             switch response {
             case .success(let t):
                 complete(t.self, nil)
             case .messageFailure(let errorType):
                 complete(nil, errorType.rawValue)
             }
-            
         }
-        
     }
-  
+    
 }

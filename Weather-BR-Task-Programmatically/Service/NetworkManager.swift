@@ -17,3 +17,27 @@ enum NetworkResponse<T> {
     case messageFailure(ErrorType)
 }
 
+
+private enum EndPoint: String {
+    case trending = "current"
+}
+
+enum baseURL: String {
+case url = "https://weather.visualcrossing.com/VisualCrossingWebServices/"
+}
+
+enum apiKey: String {
+    case key = "2RS2L2SRR34FEPUWMFHJQ9XLF"
+}
+
+enum Request {
+    case trending
+    
+    var path: String {
+        switch self {
+        case .trending:
+            return EndPoint.trending.rawValue
+        }
+    }
+}
+

@@ -7,39 +7,38 @@
 
 import UIKit
 
-struct TopViewCellModel {
+struct TopCollectionCellModel {
     let image: String
-    let label1: String
-    let label2: String
+    let text1: String
+    let text2: String
 }
 
 class TopCollectionCell: UICollectionViewCell {
     
-    var data: TopViewCellModel?
+    private var data: TopCollectionCellModel?
     
-    lazy  var imageView: UIImageView = {
+    private lazy  var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .center
         imageView.tintColor = .white
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    lazy var label1: UILabel = {
+    private lazy var label1: UILabel = {
        let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
+        label.backgroundColor = .clear
         label.font = .systemFont(ofSize: 11)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    lazy var label2: UILabel = {
+    private lazy var label2: UILabel = {
        let label = UILabel()
         label.textColor = .white
+        label.backgroundColor = .clear
         label.font = .systemFont(ofSize: 11)
         label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -64,43 +63,26 @@ class TopCollectionCell: UICollectionViewCell {
         layer.cornerRadius = 18
         layer.borderWidth = 1
         layer.borderColor = UIColor.gray.withAlphaComponent(0.7).cgColor
+        
         addSubview(imageView)
         addSubview(label1)
         addSubview(label2)
         
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 4),
-            imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 26.0),
-            imageView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            
-            label1.topAnchor.constraint(equalTo: self.imageView.bottomAnchor),
-            label1.bottomAnchor.constraint(equalTo: self.label1.topAnchor),
-            label1.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            label1.heightAnchor.constraint(equalToConstant: 18),
-            label1.widthAnchor.constraint(equalTo: self.widthAnchor),
-            
-            label2.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            label2.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            label2.heightAnchor.constraint(equalToConstant: 18),
-            label2.widthAnchor.constraint(equalTo: self.widthAnchor),
-            
-        ])
+        imageView.anchor(top: nil, bottom: nil, leading: self.leadingAnchor, trailing: self.trailingAnchor, padding: .init(top: 4, left: 0, bottom: 0, right: 0), size: CGSize(width: 26, height: 0))
+        
+        label1.anchor(top: self.imageView.bottomAnchor, bottom: self.label1.topAnchor, leading: self.leadingAnchor, trailing: self.trailingAnchor, size: CGSize(width: 0, height: 18))
+        label1.centerYSuperView()
+        
+        label2.anchor(top: nil, bottom: self.bottomAnchor, leading: self.leadingAnchor, trailing: self.trailingAnchor,padding: .init(top: 0, left: 0, bottom: 4, right: 0) ,size: CGSize(width: 0, height: 18))
     }
     
     
-    func configure(data: TopViewCellModel?) {
-        
-    
+    func configure(data: TopCollectionCellModel?) {
         if data != nil {
             self.data = data!
             self.imageView.image = UIImage(systemName: data!.image)
-            self.label1.text = data?.label1
-        
-            self.label2.text = data?.label2
+            self.label1.text = data?.text1
+            self.label2.text = data?.text2
         }
-        
     }
-    
-
 }

@@ -16,8 +16,7 @@ class HomeViewModel {
         self.service = service
     }
     
-    
-    var successCallback: (()->())?
+    var successCallback: ((Int)->())?
     var errorCallback: ((String)->())?
     
     
@@ -25,19 +24,18 @@ class HomeViewModel {
     
     var cityName: String = "Toronto"
     
-    func getCurrentData(complete: @escaping ()->()) {
+    func getCurrentData(fromHomeVC: Bool = true, complete: @escaping ()->()) {
         
-        service.getCurrentWeather(city: cityName) { [weak self] currentModel, errorMessage in
+        service.getCurrentWeather(city: cityName.replace()) { [weak self] currentModel, errorMessage in
             if let currentModel = currentModel {
                 self!.currentWeather = currentModel
-                //self!.successCallback()
+                if !fromHomeVC {
+                    self!.successCallback?(0)
+                }
             } else {
                 self!.errorCallback!(errorMessage!)
             }
             complete()
         }
-        
     }
-
-    
 }
