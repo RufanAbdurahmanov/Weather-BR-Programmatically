@@ -9,12 +9,20 @@ import Foundation
 import Alamofire
 
 
+enum NetworkMethods: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
+}
+
+
 class NetworkRequest {
     static let shared = NetworkRequest()
     
-    func requestAPI<T: Decodable>(type: T.Type, url: String, params: [String: Any] = [:], completion: @escaping(NetworkResponse<T>)->()) {
+    func requestAPI<T: Decodable>(type: T.Type, method: NetworkMethods = .get, url: String, params: [String: Any] = [:], completion: @escaping(NetworkResponse<T>)->()) {
         AF.request(url,
-                   method: .get,
+                   method: HTTPMethod(rawValue: method.rawValue),
                    parameters: params,
                    encoding: URLEncoding.default,
                    headers: nil,

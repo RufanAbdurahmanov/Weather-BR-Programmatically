@@ -142,8 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				5C19ECC029535B81007D4D19 /* HomeViewController.swift */,
-				5CFEEA73295D6DB10044FFCA /* BottomView.swift */,
-				5CFEEA75295D7EB00044FFCA /* CustomTopView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,7 +222,9 @@
 		5CB89D1629557137007A9841 /* ReusableViews */ = {
 			isa = PBXGroup;
 			children = (
+				5CFEEA75295D7EB00044FFCA /* CustomTopView.swift */,
 				5CB89D1729557162007A9841 /* TopView.swift */,
+				5CFEEA73295D6DB10044FFCA /* BottomView.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";

@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+
 // MARK: - Current
 struct Current: Codable {
     let queryCost: Int?
@@ -15,6 +17,7 @@ struct Current: Codable {
     let tzoffset: Int?
     let days: [CurrentConditions]?
     let currentConditions: CurrentConditions?
+
 }
 
 // MARK: - CurrentConditions
@@ -40,5 +43,5 @@ struct CurrentConditions: Codable {
     let feelslikemin, precipcover: Double?
     let severerisk: Int?
     let currentConditionsDescription: String?
-    
+
 }
