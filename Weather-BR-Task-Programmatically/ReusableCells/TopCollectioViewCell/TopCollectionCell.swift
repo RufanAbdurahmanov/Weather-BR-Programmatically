@@ -15,6 +15,8 @@ struct TopCollectionCellModel {
 
 class TopCollectionCell: UICollectionViewCell {
     
+    static let identifier = "\(TopCollectionCell.self)"
+    
     private var data: TopCollectionCellModel?
     
     private lazy  var imageView: UIImageView = {
@@ -70,7 +72,7 @@ class TopCollectionCell: UICollectionViewCell {
         
         imageView.anchor(top: nil, bottom: nil, leading: self.leadingAnchor, trailing: self.trailingAnchor, padding: .init(top: 4, left: 0, bottom: 0, right: 0), size: CGSize(width: 26, height: 0))
         
-        label1.anchor(top: self.imageView.bottomAnchor, bottom: self.label1.topAnchor, leading: self.leadingAnchor, trailing: self.trailingAnchor, size: CGSize(width: 0, height: 18))
+        label1.anchor(top: self.imageView.bottomAnchor, bottom: self.label2.topAnchor, leading: self.leadingAnchor, trailing: self.trailingAnchor, size: CGSize(width: 0, height: 18))
         label1.centerYSuperView()
         
         label2.anchor(top: nil, bottom: self.bottomAnchor, leading: self.leadingAnchor, trailing: self.trailingAnchor,padding: .init(top: 0, left: 0, bottom: 4, right: 0) ,size: CGSize(width: 0, height: 18))

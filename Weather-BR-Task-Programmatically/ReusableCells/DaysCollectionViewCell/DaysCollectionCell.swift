@@ -9,6 +9,8 @@ import UIKit
 
 class DaysCollectionCell: UICollectionViewCell {
     
+    static let identifier = "\(DaysCollectionCell.self)"
+    
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center

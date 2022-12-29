@@ -104,27 +104,30 @@ class TopView: UIView {
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 76, height: 66)
         let collView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collView.translatesAutoresizingMaskIntoConstraints = false
         collView.delegate = self
         collView.dataSource = self
         collView.backgroundColor = .clear
         collView.showsHorizontalScrollIndicator = false
+        collView.register(TopCollectionCell.self, forCellWithReuseIdentifier: TopCollectionCell.identifier)
         self.addSubview(collView)
         return collView
     }()
     
     private var collectionData: [TopCollectionCellModel]?
-    private let cellID = "\(TopCollectionCell.self)"
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupConstraints()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupConstraints()
         
+        backgroundColor = UIColor(red: 48/255, green: 29/255, blue: 99/255, alpha: 1)
+        layer.cornerRadius = 20
+        layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        layer.borderWidth = 1.0
     }
     
     func configure(cityName: String, data: TopViewModel) {
@@ -147,8 +150,6 @@ class TopView: UIView {
     }
     
     private func setupConstraints() {
-        
-        collectionView.register(TopCollectionCell.self, forCellWithReuseIdentifier: cellID)
         
         todayLabel.anchor(top: self.topAnchor, bottom: nil, leading: self.leadingAnchor, trailing: nil, padding: .init(top: 16, left: 20, bottom: 0, right: 0))
         
@@ -178,7 +179,7 @@ extension TopView: UICollectionViewDelegate, UICollectionViewDataSource {
         collectionData?.count ?? 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! TopCollectionCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopCollectionCell.identifier, for: indexPath) as! TopCollectionCell
         cell.configure(data: collectionData![indexPath.item])
         return cell
     }
